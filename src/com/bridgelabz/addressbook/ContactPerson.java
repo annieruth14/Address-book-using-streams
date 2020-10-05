@@ -52,24 +52,25 @@ public class ContactPerson {
 
 	public void viewByState(String state) {
 
-		 map.entrySet().stream()
+		 List<String> stateList = map.entrySet().stream()
 		 	.flatMap(entry -> entry.getValue().stream()
 		 			.filter(b -> state.equals(b.getState()))
 		 			.map(n -> "Address book: " + entry.getKey() + " Name of person: " + n.getFirst_name() ))
 		 			.collect(Collectors.toList())
-		 			.forEach(System.out::println);
-		
+		 			;
+		 System.out.println("Total persons in state : " + stateList.stream().count());
 	}
 
 
 	public void viewByCity(String city) {
 		
-		 map.entrySet().stream()
+		 List<String> cityList = map.entrySet().stream()
 		 	.flatMap(entry -> entry.getValue().stream()
 		 			.filter(b -> city.equals(b.getCity()))
 		 			.map(n -> "Address book: " + entry.getKey() + " Name of person: " + n.getFirst_name() ))
 		 			.collect(Collectors.toList())
-		 			.forEach(System.out::println);
+		 			;
+		 System.out.println("Total persons in city : " + cityList.stream().count());
 		
 	}
 
