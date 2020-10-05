@@ -33,9 +33,23 @@ public class ContactPerson {
 		System.out.println("View person by state. \n Enter state name : ");
 		String state = sc.nextLine();
 		obj.viewByState(state);
+		System.out.println("Search person by state or city. Enter name of person: ");
+		String personName = sc.nextLine();
+		obj.searchPerson(personName);
 	}
 	
 	
+	public void searchPerson(String personName) {
+		 map.entrySet().stream()
+		 	.flatMap(entry -> entry.getValue().stream()
+		 			.filter(b -> personName.equals(b.getFirst_name()))
+		 			.map(n -> "Address book: " + entry.getKey() + " City: " + n.getCity() + " State:" + n.getState() ))
+		 			.collect(Collectors.toList())
+		 			.forEach(System.out::println);
+		
+	}
+
+
 	public void viewByState(String state) {
 
 		 map.entrySet().stream()
