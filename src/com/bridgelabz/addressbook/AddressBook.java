@@ -84,5 +84,21 @@ public class AddressBook {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	@Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true; 
+        } 
+       if (!(obj instanceof AddressBook)) { 
+            return false; 
+        } 
+        AddressBook temp = (AddressBook) obj;
+        if(first_name.equals(temp.first_name))
+        	return true;
+        else
+        	return false;
+    } 
+
 }
 

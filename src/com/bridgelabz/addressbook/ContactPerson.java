@@ -1,5 +1,6 @@
 package com.bridgelabz.addressbook;
 import java.util.Scanner;
+import java.util.stream.Stream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -69,7 +70,13 @@ public class ContactPerson {
 			String email = sc.nextLine();
 			
 			AddressBook book = new AddressBook(f_name,l_name,address,city,state,zip,ph,email);
-			list.add(book);
+			
+			boolean duplicate = list.stream().anyMatch(n -> n.equals(book));
+			if(duplicate==true)
+				System.out.println("Name already exists. Hence cannot be added. ");
+			else
+				list.add(book);
+			
 			System.out.println("Do you want to enter more person? (yes/no) : ");
 			answer = sc.nextLine();
 		}
@@ -129,7 +136,7 @@ public class ContactPerson {
 	
 	public void displayMap() {
 		for(Map.Entry<String, ArrayList<AddressBook>> m : map.entrySet()) {
-			System.out.println(m.getKey() );
+			System.out.println( "Address book " + m.getKey()+ " : " );
 			for(AddressBook p : m.getValue()){
 	            System.out.print(p.getFirst_name()+" "+ p.getLast_name()+" " + p.getAddress()+" "+ p.getCity()+" "+ p.getState()+" "+ p.getZip()+" "+ p.getPhone()+ " " +p.getEmail() + "\n");
 
