@@ -99,6 +99,9 @@ public class AddressBook {
         else
         	return false;
     } 
-
+	
+//	 public String toString() {  
+//	        return this.city + ", "+ this.first_name; 
+//	    }  
 }
 

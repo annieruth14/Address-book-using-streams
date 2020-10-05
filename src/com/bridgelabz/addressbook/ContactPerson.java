@@ -37,11 +37,47 @@ public class ContactPerson {
 		String personName = sc.nextLine();
 		obj.searchPerson(personName);
 		obj.sortByName();
+		obj.sortByCity();
+		
+	}
+	
+	public void sortByState() {
+		System.out.println("Sort by State : ");
+		List<String> stateList = map.entrySet().stream()
+			 	.flatMap(entry -> entry.getValue().stream()
+			 			.map(n ->  n.getState() ))
+			 			.collect(Collectors.toList())
+			 			;
+	 stateList.stream().sorted().forEach(m -> System.out.println(m));
+		
+	}
+	
+	public void sortByZip() {
+		System.out.println("Sort by Zip code : ");
+		List<Integer> zipList = map.entrySet().stream()
+			 	.flatMap(entry -> entry.getValue().stream()
+			 			.map(n ->  n.getZip() ))
+			 			.collect(Collectors.toList())
+			 			;
+	 zipList.stream().sorted().forEach(m -> System.out.println(m));
 		
 	}
 	
 	
+	public void sortByCity() {
+		System.out.println("Sort by city : ");
+		List<String> cityList = map.entrySet().stream()
+			 	.flatMap(entry -> entry.getValue().stream()
+			 			.map(n ->  n.getCity() ))
+			 			.collect(Collectors.toList())
+			 			;
+	 cityList.stream().sorted().forEach(m -> System.out.println(m));
+		
+	}
+
+
 	private void sortByName() {
+		System.out.println("Sort by name");
 		 List<String> personList = map.entrySet().stream()
 				 	.flatMap(entry -> entry.getValue().stream()
 				 			.map(n ->  n.getFirst_name() ))
@@ -102,7 +138,7 @@ public class ContactPerson {
 		String ansDel = sc.nextLine();
 		if(ansDel.equals("yes"))
 			obj.deleteContact(listOfPerson);
-		obj.displayList(listOfPerson);
+		obj.displayList(listOfPerson);	
 		return listOfPerson;
 	}
 	
