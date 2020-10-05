@@ -1,9 +1,13 @@
 package com.bridgelabz.addressbook;
 import java.util.Scanner;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class ContactPerson {
@@ -23,9 +27,38 @@ public class ContactPerson {
 			ans = sc.nextLine();
 		}
 		obj.displayMap();
+		System.out.println("Search person using city. \n Enter city name :");
+		String city = sc.nextLine();
+		obj.searchByCity(city);
+		System.out.println("Search person by state. \n Enter state name : ");
+		String state = sc.nextLine();
+		obj.searchByState(state);
 	}
 	
 	
+	public void searchByState(String state) {
+
+		 map.entrySet().stream()
+		 	.flatMap(entry -> entry.getValue().stream()
+		 			.filter(b -> state.equals(b.getState()))
+		 			.map(n -> "Address book: " + entry.getKey() + " Name of person: " + n.getFirst_name() ))
+		 			.collect(Collectors.toList())
+		 			.forEach(System.out::println);
+		
+	}
+
+
+	public void searchByCity(String city) {
+		
+		 map.entrySet().stream()
+		 	.flatMap(entry -> entry.getValue().stream()
+		 			.filter(b -> city.equals(b.getCity()))
+		 			.map(n -> "Address book: " + entry.getKey() + " Name of person: " + n.getFirst_name() ))
+		 			.collect(Collectors.toList())
+		 			.forEach(System.out::println);
+		
+	}
+
 	public ArrayList book () {
 		ArrayList<AddressBook> listOfPerson = new ArrayList<AddressBook>();
 		System.out.println("Do you want to add person ? (yes/no) :");
