@@ -27,16 +27,16 @@ public class ContactPerson {
 			ans = sc.nextLine();
 		}
 		obj.displayMap();
-		System.out.println("Search person using city. \n Enter city name :");
+		System.out.println("View person using city. \n Enter city name :");
 		String city = sc.nextLine();
-		obj.searchByCity(city);
-		System.out.println("Search person by state. \n Enter state name : ");
+		obj.viewByCity(city);
+		System.out.println("View person by state. \n Enter state name : ");
 		String state = sc.nextLine();
-		obj.searchByState(state);
+		obj.viewByState(state);
 	}
 	
 	
-	public void searchByState(String state) {
+	public void viewByState(String state) {
 
 		 map.entrySet().stream()
 		 	.flatMap(entry -> entry.getValue().stream()
@@ -48,7 +48,7 @@ public class ContactPerson {
 	}
 
 
-	public void searchByCity(String city) {
+	public void viewByCity(String city) {
 		
 		 map.entrySet().stream()
 		 	.flatMap(entry -> entry.getValue().stream()
