@@ -36,9 +36,21 @@ public class ContactPerson {
 		System.out.println("Search person by state or city. Enter name of person: ");
 		String personName = sc.nextLine();
 		obj.searchPerson(personName);
+		obj.sortByName();
+		
 	}
 	
 	
+	private void sortByName() {
+		 List<String> personList = map.entrySet().stream()
+				 	.flatMap(entry -> entry.getValue().stream()
+				 			.map(n ->  n.getFirst_name() ))
+				 			.collect(Collectors.toList())
+				 			;
+		 personList.stream().sorted().forEach(m -> System.out.println(m));
+	}
+
+
 	public void searchPerson(String personName) {
 		 map.entrySet().stream()
 		 	.flatMap(entry -> entry.getValue().stream()
