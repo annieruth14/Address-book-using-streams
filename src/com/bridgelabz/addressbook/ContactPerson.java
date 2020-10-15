@@ -3,6 +3,9 @@ import java.util.Scanner;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -12,12 +15,12 @@ import java.util.Map;
 
 public class ContactPerson {
 	public static ContactPerson obj = new ContactPerson();
-	
+	public static String FILE_NAME = "Address-Book-Data.txt";
 	public static Scanner sc = new Scanner(System.in);
 	public static Map<String , ArrayList<AddressBook> > map = new HashMap< String, ArrayList<AddressBook>> ();
 	
 	public static void main(String[] args) {
-		System.out.println("Hey Annie");
+		System.out.println("Hey Welcome !!");
 		String ans = " ";
 		while(!(ans.equals("no"))) {
 			System.out.println("Give a name for the address book");
@@ -26,6 +29,7 @@ public class ContactPerson {
 			System.out.println("Do you want to create an Address Book ? (yes/no) :");
 			ans = sc.nextLine();
 		}
+		obj.addMapToFile(map);
 		obj.displayMap();
 		System.out.println("View person using city. \n Enter city name :");
 		String city = sc.nextLine();
@@ -38,9 +42,25 @@ public class ContactPerson {
 		obj.searchPerson(personName);
 		obj.sortByName();
 		obj.sortByCity();
-		
+		obj.sortByState();
+		obj.sortByZip();
 	}
 	
+	public void addMapToFile(Map<String, ArrayList<AddressBook>> mapOfAddressBook) {
+		StringBuffer empBuffer = new StringBuffer();
+		mapOfAddressBook.forEach((entry , value) -> {
+			String mapEntry = entry.concat(" : ");
+			empBuffer.append(mapEntry);
+			String mapValue = value.toString().concat("\n");
+			empBuffer.append(mapValue);
+		});
+		try {
+			Files.write(Paths.get(FILE_NAME), empBuffer.toString().getBytes());
+		} catch (IOException e) {
+
+		}
+	}
+
 	public void sortByState() {
 		System.out.println("Sort by State : ");
 		List<String> stateList = map.entrySet().stream()
@@ -112,7 +132,7 @@ public class ContactPerson {
 
 	public void viewByCity(String city) {
 		
-		 List<String> cityList = map.entrySet().stream()
+		 List<String> cityList =  map.entrySet().stream()
 		 	.flatMap(entry -> entry.getValue().stream()
 		 			.filter(b -> city.equals(b.getCity()))
 		 			.map(n -> "Address book: " + entry.getKey() + " Name of person: " + n.getFirst_name() ))

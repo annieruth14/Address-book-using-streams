@@ -100,8 +100,8 @@ public class AddressBook {
         	return false;
     } 
 	
-//	 public String toString() {  
-//	        return this.city + ", "+ this.first_name; 
-//	    }  
+	 public String toString() {  
+	        return (first_name + " " + last_name + " " + address + " " + city + " " + state + " " + zip + " " + phone + " " + email); 
+	    }  
 }
 
